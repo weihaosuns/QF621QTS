@@ -1,32 +1,26 @@
 import os
 import pandas as pd
-from config import RAW_STOCK_DIR
 
-def load_ticker_list(csv_path: str) -> list:
-    df = pd.read_csv(csv_path)
-    return df["Symbol"].tolist()
+def build_adjclose_dataframe(stock_dir: str, trading_days_path: str) -> pd.DataFrame:
+    # Use correct column name "Date" (capital D)
+    trading_days = pd.read_csv(trading_days_path, parse_dates=['Date'])['Date']
 
-def load_trading_days(csv_path: str) -> pd.DatetimeIndex:
-    df = pd.read_csv(csv_path, parse_dates=["Date"])
-    return pd.DatetimeIndex(df["Date"])
+    all_prices = pd.DataFrame(index=trading_days)
 
-def load_price_series(ticker: str) -> pd.Series:
-    file_path = os.path.join(RAW_STOCK_DIR, f"{ticker}.csv")
-    if not os.path.exists(file_path):
-        return None
-    try:
-        df = pd.read_csv(file_path, parse_dates=["Date"], index_col="Date")
-        return df["Adj Close"].rename(ticker)
-    except Exception as e:
-        print(f"[ERROR] {ticker}: {e}")
-        return None
+    for file in os.listdir(stock_dir):
+        if not file.endswith('.csv'):
+            continue
 
-def adj_close_df(tickers: list, trading_days: pd.DatetimeIndex, threshold: float = 0.2):
-    adj_close_df = pd.DataFrame(index=trading_days)
+        ticker = file.replace(".csv", "")
+        path = os.path.join(stock_dir, file)
 
-    for ticker in tickers:
-        series = load_price_series(ticker)
-        if series is not None:
-            adj_close_df[ticker] = series
+        try:
+            cols = ['Date', 'Price', 'Close', 'High', 'Low', 'Open', 'Volume']
+            df = pd.read_csv(path, skiprows=3, names=cols, parse_dates=['Date'], index_col='Date')
+            df = df.drop(columns=['Price'])
+            adj_close = df['Close'].reindex(trading_days)
+            all_prices[ticker] = adj_close
+        except Exception as e:
+            print(f"[WARN] Skipping {ticker} due to error: {e}")
 
-    return adj_close_df
+    return all_prices

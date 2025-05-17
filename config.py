@@ -15,9 +15,18 @@ PROCESSED_TICKERS_CSV = os.path.join(PROCESSED_DATA_DIR, "sp500_tickers_processe
 RAW_TRADING_DAYS_CSV = os.path.join(RAW_DATA_DIR, "us_trading_days.csv")
 PROCESSED_TRADING_DAYS_CSV = os.path.join(PROCESSED_DATA_DIR, "us_trading_days_processed.csv")
 
-# Paths for prices
-RAW_STOCK_DIR = os.path.join(RAW_DATA_DIR, "stock")  # if multiple files or big files
-PROCESSED_STOCK_CSV = os.path.join(PROCESSED_DATA_DIR, "prices_df.csv")
+# Paths for stock price files and combined dataframe
+RAW_STOCK_DIR = os.path.join(RAW_DATA_DIR, "stock")
+PROCESSED_STOCK_CSV = os.path.join(PROCESSED_DATA_DIR, "all_snp_prices.csv")
+
+# Path for PCA-ready returns
+PROCESSED_PCA_RETURNS_CSV = os.path.join(PROCESSED_DATA_DIR, "processed_pca_returns.csv")
+
+# Path for Rebalance Dates
+PROCESSED_REBALANCE_DATES_CSV = os.path.join(PROCESSED_DATA_DIR, "rebalance_dates.csv")
+
+# Paths for PCA weights
+PCA_WEIGHTS_DIR = os.path.join(PROCESSED_DATA_DIR, "pca_weights")
 
 # Dates for downloading prices
 START_DATE = "2000-01-01"
