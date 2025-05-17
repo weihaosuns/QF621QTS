@@ -1,0 +1,27 @@
+# requirements.txt
+# Project: PCA-Based, Event-Driven Portfolio Strategy
+# Created: 2025-05-17
+
+# Core data science and numerical libraries
+pandas==2.2.1             # Data manipulation and time series analysis
+numpy==1.26.4             # Numerical computing
+scikit-learn==1.4.2       # PCA and preprocessing utilities
+
+# Financial data and backtesting
+yfinance==0.2.40          # Pull stock data from Yahoo Finance
+fredapi==0.5.1            # Access U.S. economic data from FRED
+bt==0.2.9                 # Flexible backtesting framework
+pyfolio-reloaded==0.9.8   # Performance and risk analytics (latest version)
+statsmodels==0.14.1       # Regression, CAPM, and econometrics
+
+# Visualization
+matplotlib==3.8.4         # Static plots
+seaborn==0.13.2           # Statistical plotting
+
+# Optional: Interactive notebooks and debugging
+jupyter==1.0.0            # Jupyter notebooks
+ipykernel==6.29.3         # Kernel support for notebooks
+
+# Optional: Performance improvement (if needed later)
+# joblib==1.4.2            # Parallel processing
+# tqdm==4.66.2             # Progress bars
