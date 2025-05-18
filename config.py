@@ -28,6 +28,19 @@ PROCESSED_REBALANCE_DATES_CSV = os.path.join(PROCESSED_DATA_DIR, "rebalance_date
 # Paths for PCA weights
 PCA_WEIGHTS_DIR = os.path.join(PROCESSED_DATA_DIR, "pca_weights")
 
+# Path for Portfolio weights
+PORTFOLIO_WEIGHTS_DIR = os.path.join(PROCESSED_DATA_DIR, "portfolio_weights")
+
+# Path for raw and processed GSPC data
+RAW_GSPC_CSV = os.path.join(RAW_DATA_DIR, "^GSPC.csv")
+PROCESSED_GSPC_CSV = os.path.join(PROCESSED_DATA_DIR, "gspc_adjclose.csv")
+
+# Path for Portfolio metrics
+PORTFOLIO_METRICS_DIR = os.path.join(PROCESSED_DATA_DIR, "portfolio_metrics")
+
+# Path for Base Strategy weights
+BASE_STRATEGY_WEIGHTS_DIR = os.path.join(PROCESSED_DATA_DIR, "base_strategy_weights")
+
 # Dates for downloading prices
 START_DATE = "2000-01-01"
 END_DATE = datetime.now().strftime("%Y-%m-%d")

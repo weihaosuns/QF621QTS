@@ -14,6 +14,8 @@ def main():
     pca_weights_dir = os.path.join(PROCESSED_DATA_DIR, "pca_weights")
     os.makedirs(pca_weights_dir, exist_ok=True)
 
+    returns_start_date = returns_df.index.min()
+
     # Annual PCA weights (only March rebalance)
     annual_rebalance_dates = rebalance_dates[rebalance_dates.dt.month == 3]
     print(f"🔄 Running Annual PCA weights on {len(annual_rebalance_dates)} rebalance dates")
@@ -24,7 +26,8 @@ def main():
             annual_rebalance_dates,
             lookback=lookback,
             frequency="annual",
-            save_dir=pca_weights_dir
+            save_dir=pca_weights_dir,
+            returns_start_date=returns_start_date
         )
 
     # Quarterly PCA weights (all rebalance dates)
@@ -36,7 +39,8 @@ def main():
             rebalance_dates,
             lookback=lookback,
             frequency="quarterly",
-            save_dir=pca_weights_dir
+            save_dir=pca_weights_dir,
+            returns_start_date=returns_start_date
         )
 
 if __name__ == "__main__":
